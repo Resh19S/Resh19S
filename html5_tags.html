@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tags Explorer</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f4f6f8;
+            padding: 20px;
+        }
+
+        section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        code {
+            background: #eee;
+            padding: 3px 6px;
+            border-radius: 4px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+
+        input, textarea, select, button {
+            margin: 5px 0;
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>HTML Tags Explorer </h1>
+<p>This page demonstrates commonly used HTML tags.</p>
+
+<!-- Text & Formatting -->
+<section>
+    <h2>Text & Formatting</h2>
+    <p>This is a <b>bold</b> text and this is <strong>strong</strong>.</p>
+    <p>This is <i>italic</i> and this is <em>emphasized</em>.</p>
+    <p>This is <u>underlined</u> and <mark>highlighted</mark>.</p>
+    <p>This is <small>small</small> and <del>deleted</del> text.</p>
+    <p>Superscript: x<sup>2</sup> | Subscript: H<sub>2</sub>O</p>
+</section>
+
+<!-- Headings -->
+<section>
+    <h2>Headings</h2>
+    <h1>H1 Heading</h1>
+    <h2>H2 Heading</h2>
+    <h3>H3 Heading</h3>
+    <h4>H4 Heading</h4>
+    <h5>H5 Heading</h5>
+    <h6>H6 Heading</h6>
+</section>
+
+<!-- Links & Images -->
+<section>
+    <h2>Links & Images</h2>
+    <a href="https://www.example.com" target="_blank">Visit Example.com</a><br><br>
+    <img src="https://via.placeholder.com/200" alt="Sample Image">
+</section>
+
+<!-- Lists -->
+<section>
+    <h2>Lists</h2>
+    <h3>Unordered List</h3>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+    </ul>
+
+    <h3>Ordered List</h3>
+    <ol>
+        <li>Learn HTML</li>
+        <li>Learn CSS</li>
+        <li>Learn JS</li>
+    </ol>
+
+    <h3>Description List</h3>
+    <dl>
+        <dt>HTML</dt>
+        <dd>Markup language for web pages</dd>
+    </dl>
+</section>
+
+<!-- Tables -->
+<section>
+    <h2>Tables</h2>
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Skill</th>
+        </tr>
+        <tr>
+            <td>Resh</td>
+            <td>Web Dev</td>
+        </tr>
+    </table>
+</section>
+
+</section> 
+    <h2>Datalist</h2>
+    <input list="languages" name="languages">
+    <datalist id="languages">
+        <option value="html"></option>
+        <option value="bomboclat"></option>
+        <option value="okkokokok"></option>
+    </datalist>
+
+
+<!-- Media -->
+<section>
+    <h2>Media</h2>
+    <audio controls>
+        <source src="sample.mp3" type="audio/mpeg">
+        Your browser does not support audio.
+    </audio><br><br>
+
+    <video width="300" controls>
+        <source src="sample.mp4" type="video/mp4">
+        Your browser does not support video.
+    </video>
+</section>
+<section>
+    <h2>Canvas</h2>
+    <canvas id="canvas" width="200" height="100"></canvas>
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        ctx.fillStyle = "green";
+        ctx.fillRect(10, 10, 180, 80);
+    </script>
+</section>
+
+
+</body>
+</html>
