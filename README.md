@@ -3,8 +3,7 @@
 <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=24&duration=3000&pause=1000&color=A78BFA&center=true&vCenter=true&width=650&lines=Hi%2C+I'm+Reshal+%F0%9F%91%8B;ML+Systems+%C2%B7+Quantization+Research+%C2%B7+Edge+AI;Currently+teaching+a+1.7B+model+to+draft+for+an+8B+one" alt="Typing SVG" />
 
 <a href="mailto:reshaldahima0@gmail.com"><img src="https://img.shields.io/badge/Email-reshaldahima0%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email"></a>
-<a href="#"><img src="https://img.shields.io/badge/LinkedIn-Reshal%20Dahima-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-<a href="https://github.com/vllm-project/vllm/issues/49893"><img src="https://img.shields.io/badge/vLLM-Bug%20%2349893%20filed-orange?style=flat-square&logo=github" alt="vLLM issue"></a>
+<a href="https://www.linkedin.com/in/reshal-dahima-2b168032a/"><img src="https://img.shields.io/badge/LinkedIn-Reshal%20Dahima-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a><a href="https://github.com/vllm-project/vllm/issues/49893"><img src="https://img.shields.io/badge/vLLM-Bug%20%2349893%20filed-orange?style=flat-square&logo=github" alt="vLLM issue"></a>
 
 B.Tech Computer Science· Class of 2028
 
