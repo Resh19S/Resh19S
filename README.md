@@ -6,7 +6,7 @@
 <a href="#"><img src="https://img.shields.io/badge/LinkedIn-Reshal%20Dahima-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
 <a href="https://github.com/vllm-project/vllm/issues/49893"><img src="https://img.shields.io/badge/vLLM-Bug%20%2349893%20filed-orange?style=flat-square&logo=github" alt="vLLM issue"></a>
 
-B.Tech Computer Science, SIES Graduate School of Technology · Class of 2028
+B.Tech Computer Science· Class of 2028
 
 </div>
 
@@ -14,19 +14,12 @@ B.Tech Computer Science, SIES Graduate School of Technology · Class of 2028
 
 ## About
 
-I work on the layer under the model — quantization, speculative decoding, and inference
-serving — and separately build full end-to-end systems (a voice-driven desktop assistant with
+I work on the layer under the model quantization, speculative decoding, and inference
+serving and separately build full end-to-end systems (a voice-driven desktop assistant with
 its own hybrid command router and audio pipeline). Currently a software intern at **Crave
-Infotech**, shipping applied-AI workflows (contract intelligence, predictive maintenance,
-compliance monitoring, invoice processing) for client engagements.
+Infotech**
 
-Selected for **Amazon ML Summer School 2026** (2.1% acceptance, 3,000 / 150,000+ applicants)
-and invited to international Edge AI research programs at **KTH Royal Institute of Technology**
-(Stockholm) and the **University of Helsinki** (EdgeGen PhD summer school, with NTNU and Aarhus).
-Research on LLM-driven desktop automation presented at the **SVIMS International Research
-Conference**.
-
-I write findings down even when they're negative — my project docs keep failed hypotheses,
+I write findings down even when they're negative. my project docs keep failed hypotheses,
 disproven anomalies, and the debugging trail alongside the results that worked. A quantization
 bug I filed and reproduced for vLLM was confirmed by a maintainer within hours ([#49893](https://github.com/vllm-project/vllm/issues/49893) → [PR #49900](https://github.com/vllm-project/vllm/pull/49900)).
 
@@ -89,13 +82,13 @@ A voice-first Windows desktop assistant, built from scratch — not a wrapper ar
 |---|---|
 | 🏆 **Amazon ML Summer School 2026** | Selected cohort member — 2.1% acceptance (3,000 / 150,000+ applicants); six-module ML curriculum |
 | 🌍 **EdgeGen PhD Summer School** — University of Helsinki | Generative Edge Intelligence, jointly organized with KTH, NTNU, Aarhus (NUEI) |
-| 🌍 **Edge AI Research Program** — KTH Royal Institute of Technology | ~500 applicants, 35 selected |
+| 🌍 **Edge AI Research Program** — KTH Royal Institute of Technology Stockholm Sweden | EDGE AI |
 | 📄 **SVIMS International Research Conference** | Presented: *Enhancing Desktop Productivity with Generative AI Automation* |
 | 🏓 **National Table Tennis Championship** | Semifinalist · College team captain · 3× Inter-College Singles Champion |
 
 <br>
 
-## Snake
+## snake omgg
 
 <div align="center">
 
@@ -144,6 +137,6 @@ Embeddings & Vector Databases · ASR (Whisper) · Edge AI
 
 <br><br>
 
-*Reach out about quantization, speculative decoding, or vLLM internals — happy to talk shop.*
+*Reach out about quantization, speculative decoding, or vLLM internals. always happy to talk shop.*
 
 </div>
