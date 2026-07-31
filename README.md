@@ -1,103 +1,152 @@
 <div align="center">
 
-# Reshal Dahima
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=26&duration=3000&pause=1000&color=A78BFA&center=true&vCenter=true&width=650&lines=Hi%2C+I'm+Reshal+%F0%9F%91%8B;I+quantize+models+until+they+almost+break;Sometimes+I+file+bugs+vLLM+maintainers+fix+same+day;Currently+teaching+a+1.7B+model+to+draft+for+an+8B+one" alt="Typing SVG" />
 
-### ML Systems &nbsp;·&nbsp; Quantization Research &nbsp;·&nbsp; Edge AI
-
-<a href="mailto:reshaldahima0@gmail.com"><img src="https://img.shields.io/badge/Email-reshaldahima0%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white" alt="Email"></a>
-<a href="#"><img src="https://img.shields.io/badge/LinkedIn-Reshal%20Dahima-0A66C2?style=flat-square&logo=linkedin&logoColor=white" alt="LinkedIn"></a>
-<a href="https://github.com/vllm-project/vllm/issues/49893"><img src="https://img.shields.io/badge/vLLM-Bug%20%2349893%20filed-orange?style=flat-square&logo=github" alt="vLLM issue"></a>
-
-B.Tech Computer Science, SIES Graduate School of Technology · Class of 2028
+<a href="mailto:reshaldahima0@gmail.com"><img src="https://img.shields.io/badge/-reshaldahima0@gmail.com-A78BFA?style=flat-square&logo=gmail&logoColor=white&labelColor=1a1b27" alt="Email"></a>
+<a href="#"><img src="https://img.shields.io/badge/-LinkedIn-1a1b27?style=flat-square&logo=linkedin&logoColor=0A66C2" alt="LinkedIn"></a>
+<a href="https://github.com/vllm-project/vllm/issues/49893"><img src="https://img.shields.io/badge/-vLLM%20%2349893-1a1b27?style=flat-square&logo=github&logoColor=orange" alt="vLLM issue"></a>
 
 </div>
 
 <br>
 
-## About
-
-I work on the layer under the model — quantization, speculative decoding, and inference
-serving — and separately build full end-to-end systems (a voice-driven desktop assistant with
-its own hybrid command router and audio pipeline). Currently a software intern at **Crave
-Infotech**, shipping applied-AI workflows (contract intelligence, predictive maintenance,
-compliance monitoring, invoice processing) for client engagements.
-
-Selected for **Amazon ML Summer School 2026** (2.1% acceptance, 3,000 / 150,000+ applicants)
-and invited to international Edge AI research programs at **KTH Royal Institute of Technology**
-(Stockholm) and the **University of Helsinki** (EdgeGen PhD summer school, with NTNU and Aarhus).
-Research on LLM-driven desktop automation presented at the **SVIMS International Research
-Conference**.
-
-I write findings down even when they're negative — my project docs keep failed hypotheses,
-disproven anomalies, and the debugging trail alongside the results that worked. A quantization
-bug I filed and reproduced for vLLM was confirmed by a maintainer within hours ([#49893](https://github.com/vllm-project/vllm/issues/49893) → [PR #49900](https://github.com/vllm-project/vllm/pull/49900)).
+```
+🔭 building     → a quantized drafter for speculative decoding, because a fast
+                  model that's wrong less often is more interesting than a
+                  slow model that's always right
+🌱 chasing      → the line where "more compressed" turns into "actively lying"
+                  (currently: 2.158 bits/weight, PPL says I found it)
+🐛 filed        → vllm-project/vllm#49893 — maintainer confirmed + PR'd it
+                  within hours, which was genuinely a good day
+💬 ask me about → quantization, speculative decoding, vLLM internals, or why
+                  my desktop assistant wakes up when you clap twice
+🏓 off-keyboard → national-level table tennis, 3x inter-college singles champ
+```
 
 <br>
 
-## Featured Work
+## things i've built
 
-### 🔬 Architecture vs. Precision in Speculative Decoding
-**[sgt-qat-draft →](https://github.com/Resh19S/sgt-qat-draft)**
+### 🔬 [sgt-qat-draft](https://github.com/Resh19S/sgt-qat-draft) — can a quantized dense model draft for a bigger one?
 
-A real speculative-decoding benchmark, not a simulated one: does a *quantized dense model*
-make a viable drafter against vLLM's purpose-built EAGLE-3, on Qwen3-8B with real mt-bench
-prompts?
+vLLM ships EAGLE-3, a tiny purpose-built head, as its go-to speculative decoding
+drafter. I wanted to know if a *quantized* full dense model could hang with it.
+Short answer: it gets the *quality* right (draft acceptance basically ties
+EAGLE-3, 2.443 vs. 2.474 tokens/step) and gets the *speed* very wrong (0.43x —
+slower than not speculating at all). Turns out being a good predictor and being
+architecturally cheap are two completely different problems.
 
-- **Near-parity draft quality**: mean acceptance length **2.443** (SGT-QAT drafter) vs. **2.474**
-  (EAGLE-3) — but a **0.43x wall-clock regression**, because a full 28-layer dense model is
-  architecturally too heavy per drafting step, no matter how well-quantized. Quality and speed
-  turned out to be separable outcomes.
-- Isolated a **vLLM bug**: `SpeculativeConfig(method="draft_model")` couldn't load
-  mixed-precision `compressed-tensors` checkpoints. Filed with a minimal repro
-  ([#49893](https://github.com/vllm-project/vllm/issues/49893)), confirmed by a maintainer,
-  fix opened as [PR #49900](https://github.com/vllm-project/vllm/pull/49900).
-- Pushed quantization to **2.158 bits/weight** to test the memory story directly: standalone
-  VRAM drops to 0.646 GiB (beating EAGLE-3's 1.047 GiB in-serving footprint) — but perplexity
-  collapses ~12x getting there. A memory win that isn't a viable drafter.
+Also spent a week in vLLM's source finding out *why* it couldn't load my
+compressed checkpoint, filed it properly, and a maintainer had a fix PR open
+before I woke up the next day.
 
-### 📊 Mixed-Precision-Guided Targeted QAT
-LLM quantization recovery framework, built on a fully seed-verified GPTQ-W3 protocol for Qwen3.
+<details>
+<summary>the numbers, if you're into that</summary>
+<br>
 
-- **70.3% recovery** of GPTQ-W3 damage on Qwen3-1.7B vs. full-parameter QAT, training **~30%
-  fewer parameters** — confirmed across two calibration seeds, advantage widens at the second.
-- Identified and corrected a **domain-adaptation confound** in the standard PTQ→QAT recovery
-  metric (naive formula produced a mathematically impossible >100% recovery) — supplied a
-  corrected metric with a control experiment.
-- **Reproducibility case study**: a dead `random.seed()` call (seeded a module nothing
-  downstream used) produced a false 411% PPL-swing finding that survived weight-space *and*
-  output-space mechanistic analysis before a failed causal-ablation baseline exposed it.
-  Documented in full as a lesson in what actually catches this class of bug.
+- Mean acceptance length: **2.443** (ours) vs. **2.474** (EAGLE-3) — near-parity
+- Wall-clock speedup: **0.43x** — a real regression, not a wash
+- Root cause: a full 28-layer dense model is too expensive per drafting step,
+  independent of how well it's quantized — architecture, not precision
+- Filed [vllm#49893](https://github.com/vllm-project/vllm/issues/49893)
+  (mixed-precision `compressed-tensors` checkpoints failing to load as
+  draft models) → maintainer-confirmed → [PR #49900](https://github.com/vllm-project/vllm/pull/49900)
+- Pushed to 2.158 bits/weight to chase the memory story specifically: standalone
+  VRAM beats EAGLE-3's in-serving footprint (0.646 GiB vs. 1.047 GiB) — but
+  perplexity collapses ~12x getting there. Memory win, quality loss.
 
-### 🎙️ NOVA — Neural Orchestrator for Virtual Assistance
-**[Neural-Orchestrator-for-Virtual-Assistance-NOVA- →](https://github.com/Resh19S/Neural-Orchestrator-for-Virtual-Assistance-NOVA-)**
+</details>
 
-A voice-first Windows desktop assistant, built from scratch — not a wrapper around an API.
+### 📊 mixed-precision-guided targeted QAT — a quantization recovery method, plus a bug story
 
-- **Three-stage command router** (regex → semantic fuzzy match → Gemini LLM fallback): ~80% of
-  commands resolve locally in <10ms, zero API calls.
-- **Dual-backend LLM routing** (local Ollama + Gemini 2.5 Flash) with a multi-turn dialogue
-  state machine for confirmations, ambiguity resolution, and contextual follow-ups.
-- Real-time audio pipeline: Whisper large-v3 (GPU, FP16) STT, clap/Vosk wake-word detection,
-  offline TTS, persistent memory across five JSON-backed stores (locations, apps, protocols,
-  workspaces, profile).
-- Autonomous multi-step planning and a full research pipeline (topic → search → screen-read via
-  Gemini Vision → synthesized report saved to disk) from a single spoken sentence.
+The pitch: protect the ~15% most damage-prone layers at 4-bit in one calibrated
+pass, then spend all your QAT budget only on the layers still stuck at 3-bit,
+instead of fine-tuning everything uniformly. It recovers more damage while
+training ~30% fewer parameters, and the gap *widens* on a second seed.
+
+The more fun part is the bug hunt buried in the same project: a `random.seed()`
+call that seeded a module nothing downstream actually used, silently
+producing a fake 411% perplexity swing that survived two separate rounds
+of mechanistic analysis before a failed baseline reproduction finally
+outed it. Wrote the whole chain up because burying your own dead ends is
+how the next person (or you, in six months) re-discovers them the hard way.
+
+<details>
+<summary>the numbers, if you're into that</summary>
+<br>
+
+- **70.3%** recovery of GPTQ-W3 quantization damage on Qwen3-1.7B vs. full-
+  parameter QAT baseline, at ~30% fewer trainable parameters
+- Advantage confirmed across two calibration seeds (+4.5pts → +13.5pts)
+- Found and corrected a domain-adaptation confound in the standard PTQ→QAT
+  recovery metric — the naive formula produced a >100% recovery result,
+  which is how the bug surfaced in the first place
+- Full reproducibility case study on the `random.seed()` bug: weight-space
+  analysis found nothing, output-space analysis found a convincing but
+  *wrong* localized signal, and a routine causal-ablation baseline is what
+  actually caught it
+
+</details>
+
+### 🎙️ [NOVA](https://github.com/Resh19S/Neural-Orchestrator-for-Virtual-Assistance-NOVA-) — a voice assistant that lives on my desktop, not in a browser tab
+
+Not a wrapper around an API — a three-stage router (regex → fuzzy match →
+LLM fallback) that resolves ~80% of what I say in under 10ms without ever
+touching the network, plus a dual local/cloud LLM backend, a real audio
+pipeline (Whisper, wake-word detection, offline TTS), and enough persistent
+memory that it stops asking me where my own folders are after the first time.
+
+<details>
+<summary>the numbers, if you're into that</summary>
+<br>
+
+- Three-stage command router: regex → semantic fuzzy match → Gemini LLM —
+  ~80% of commands resolve locally, <10ms, zero API calls
+- Dual-backend LLM routing (local Ollama + Gemini 2.5 Flash) with a real
+  multi-turn dialogue state machine for confirmations and follow-ups
+- Whisper large-v3 (GPU/FP16) STT, clap/Vosk wake-word detection, offline TTS
+- Autonomous research pipeline: one spoken sentence → multi-source search →
+  screen-read via Gemini Vision → synthesized report saved to disk
+
+</details>
 
 <br>
 
-## Research & Achievements
+## outside the terminal
 
-| | |
-|---|---|
-| 🏆 **Amazon ML Summer School 2026** | Selected cohort member — 2.1% acceptance (3,000 / 150,000+ applicants); six-module ML curriculum |
-| 🌍 **EdgeGen PhD Summer School** — University of Helsinki | Generative Edge Intelligence, jointly organized with KTH, NTNU, Aarhus (NUEI) |
-| 🌍 **Edge AI Research Program** — KTH Royal Institute of Technology | ~500 applicants, 35 selected |
-| 📄 **SVIMS International Research Conference** | Presented: *Enhancing Desktop Productivity with Generative AI Automation* |
-| 🏓 **National Table Tennis Championship** | Semifinalist · College team captain · 3× Inter-College Singles Champion |
+Selected for **Amazon ML Summer School 2026** (2.1% acceptance, 3,000 out of
+150,000+ applicants), and picked for two international Edge AI research
+programs — **KTH Royal Institute of Technology** (Stockholm, ~500 applicants
+→ 35 seats) and the **EdgeGen PhD Summer School** at the **University of
+Helsinki** (with NTNU and Aarhus). Presented desktop-automation research at the
+**SVIMS International Research Conference**. Also a fairly serious table tennis
+player — semifinalist at nationals, captain of my college team.
 
 <br>
 
-## Stack
+## snake eating my contribution graph, as one does
+
+<div align="center">
+
+![snake animation](https://raw.githubusercontent.com/Resh19S/Resh19S/output/github-contribution-grid-snake-dark.svg#gh-dark-mode-only)
+![snake animation](https://raw.githubusercontent.com/Resh19S/Resh19S/output/github-contribution-grid-snake.svg#gh-light-mode-only)
+
+</div>
+
+<br>
+
+<div align="center">
+
+<img src="https://github-readme-stats.vercel.app/api?username=Resh19S&show_icons=true&theme=radical&hide_border=true&count_private=true" alt="GitHub Stats" height="165">
+<img src="https://github-readme-streak-stats.herokuapp.com/?user=Resh19S&theme=radical&hide_border=true" alt="GitHub Streak" height="165">
+
+<img src="https://github-readme-activity-graph.vercel.app/graph?username=Resh19S&theme=react-dark&hide_border=true" alt="Activity graph" width="850">
+
+</div>
+
+<br>
+
+## toolbox
 
 <div align="center">
 
@@ -111,8 +160,8 @@ A voice-first Windows desktop assistant, built from scratch — not a wrapper ar
 ![Git](https://img.shields.io/badge/-Git-F05032?style=flat-square&logo=git&logoColor=white)
 ![SQLite](https://img.shields.io/badge/-SQLite-003B57?style=flat-square&logo=sqlite&logoColor=white)
 
-**Focus areas:** Quantization (PTQ/QAT) · Speculative Decoding · vLLM internals · RAG ·
-Embeddings & Vector DBs · ASR (Whisper) · Edge AI
+*quantization (PTQ/QAT) · speculative decoding · vLLM internals · RAG ·
+embeddings & vector DBs · ASR (Whisper) · edge AI*
 
 </div>
 
@@ -120,15 +169,6 @@ Embeddings & Vector DBs · ASR (Whisper) · Edge AI
 
 <div align="center">
 
-<img src="https://github-readme-stats.vercel.app/api?username=Resh19S&show_icons=true&theme=default&hide_border=true&count_private=true" alt="GitHub Stats" height="165">
-<img src="https://github-readme-streak-stats.herokuapp.com/?user=Resh19S&hide_border=true" alt="GitHub Streak" height="165">
-
-</div>
-
-<br>
-
-<div align="center">
-
-*Reach out about quantization, speculative decoding, or vLLM internals — happy to talk shop.*
+<img src="https://github-readme-quotes.vercel.app/api?type=horizontal&theme=radical" alt="Random dev quote" />
 
 </div>
